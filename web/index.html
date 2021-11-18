@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://roblox-api.funcaptcha.com/fc/api/?onload=loadChallenge" async defer></script>
+    <title>Roblox Gen</title>
+</head>
+
+<body>
+    <p id="accountstxt">Accounts: 0</p>
+    <div id="CAPTCHA"></div>
+    <script>
+        let accounts = 0;
+
+        function loadChallenge() {
+            const captcha = new FunCaptcha({
+                public_key: "A2A14B1D-1AF3-C791-9BBC-EE33CC7A0A6F",
+                target_html: "CAPTCHA",
+                callback: function (captchaToken) {
+                    fetch('/create?captcha=' + captchaToken).then(res => {
+                        captcha.refresh_session();
+                        document.getElementById('accountstxt').textContent = 'Accounts: ' + ++accounts;
+                    })
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
