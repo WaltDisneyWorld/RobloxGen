@@ -2,11 +2,12 @@ const fetch = require('node-fetch');
 const express = require('express');
 const app = express();
 const RobloxUtil = require('./RobloxUtils');
+const db_config = require('./database.json')
 const DBUtil = require('./DBUtil')(
-    'localhost',
-    'rbxgen',
-    '?RxM?zBX5Y$#@t&d',
-    'rbxgen'
+    db_config.host,
+    db_config.username,
+    db_config.password,
+    db_config.database
 );
 
 app.use(express.static('web/'))
