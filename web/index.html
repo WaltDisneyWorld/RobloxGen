@@ -20,12 +20,14 @@
                 public_key: "A2A14B1D-1AF3-C791-9BBC-EE33CC7A0A6F",
                 target_html: "CAPTCHA",
                 callback: function (captchaToken) {
-                    fetch('/create?captcha=' + captchaToken).then(res => {
+                    console.log(captcha);
+                    /*fetch('/create?captcha=' + captchaToken).then((res) => {
                         captcha.refresh_session();
                         document.getElementById('accountstxt').textContent = 'Accounts: ' + ++accounts;
-                    })
+                    })*/
                 }
             });
+
         }
     </script>
 </body>

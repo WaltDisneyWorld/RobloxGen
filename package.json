@@ -14,5 +14,6 @@
     "mysql2": "^2.3.3",
     "node-fetch": "^2.6.6",
     "node-html-parser": "^5.1.0"
-  }
+  },
+  "type": "module"
 }
