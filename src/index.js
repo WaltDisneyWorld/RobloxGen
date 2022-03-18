@@ -1,20 +1,23 @@
-const fetch = require('node-fetch');
-const express = require('express');
+import dotenv from 'dotenv'
+dotenv.config();
+
+import fetch from 'node-fetch'
+import express from 'express'
+import DBUtil from './DBUtil.js'
+import RobloxUtil from './rbx/RobloxUtils.js'
+import cors from 'cors'
+
+
 const app = express();
-const RobloxUtil = require('./RobloxUtils');
-const db_config = require('./database.json')
-const DBUtil = require('./DBUtil')(
-    db_config.host,
-    db_config.username,
-    db_config.password,
-    db_config.database
-);
+
+app.options('*', cors())
 
 app.use(express.static('web/'))
 
 app.get('/create', async (req, res) => {
     const captcha = req.query.captcha;
-    const account = await RobloxUtil.createAccount(captcha);
+    const captchaId = req.query.captchaId;
+    const account = await RobloxUtil.createAccount(captcha, captchaId);
     await DBUtil.addAccount(account.userId, account.username, account.password, account.cookie);
 
     res.send('UserId: ' + account.userId);
@@ -26,6 +29,15 @@ app.get('/gen', async (req, res) => {
     res.send(account.cookie);
 })
 
-app.listen(28493, () => {
-    console.log('Listening on port 28493!')
-})
+app.get('/field_data', async (req, res) => {
+    res.send(await RobloxUtil.getFieldData());
+});
+
+(async () => {
+    if (!(await DBUtil.connect())) return;
+    await DBUtil.setupDB();
+
+    app.listen(process.env.WEB_PORT, () => {
+        console.log('[✅] Listening on port http://localhost:' + process.env.WEB_PORT);
+    });
+})();

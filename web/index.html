@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://roblox-api.funcaptcha.com/fc/api/?onload=loadChallenge" async defer></script>
+    <meta name="referrer" content="no-referrer">
+
+    <script src="https://roblox-api.arkoselabs.com/fc/api/?onload=loadChallenge" async></script>
     <title>Roblox Gen</title>
 </head>
 
@@ -16,18 +18,36 @@
         let accounts = 0;
 
         function loadChallenge() {
-            const captcha = new FunCaptcha({
-                public_key: "A2A14B1D-1AF3-C791-9BBC-EE33CC7A0A6F",
-                target_html: "CAPTCHA",
-                callback: function (captchaToken) {
-                    console.log(captcha);
-                    /*fetch('/create?captcha=' + captchaToken).then((res) => {
-                        captcha.refresh_session();
-                        document.getElementById('accountstxt').textContent = 'Accounts: ' + ++accounts;
-                    })*/
-                }
+            fetch('/field_data').then(res => {
+                res.text().then(fieldData => {
+                    new FunCaptcha({
+                        public_key: 'A2A14B1D-1AF3-C791-9BBC-EE33CC7A0A6F',
+                        target_html: "CAPTCHA",
+                        callback: (captchaToken) => {
+                            console.log("solved");
+                            console.log(captchaToken);
+                            fetch('/create?captcha=' + captchaToken + '&captchaId=' + fieldData.split(',')[0]).then((res) => {
+                                captcha.refresh_session();
+                                document.getElementById('accountstxt').textContent =
+                                    'Accounts: ' + ++
+                                accounts;
+                            });
+                        },
+                        data: {
+                            blob: fieldData.split(',')[1]
+                        }
+                    });
+                });
             });
+        }
 
+        async function getPublicKey() {
+            const url = 'https://apis.rbxcdn.com/captcha/v1/metadata';
+            const res = await fetch(url);
+            const data = await res.json();
+            const publicKeys = data['funCaptchaPublicKeys'];
+
+            return publicKeys['ACTION_TYPE_WEB_SIGNUP'];
         }
     </script>
 </body>

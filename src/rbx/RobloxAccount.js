@@ -1,4 +1,4 @@
-module.exports = class RobloxAccount {
+export default class RobloxAccount {
     username
     userId
     password
