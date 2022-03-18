@@ -69,8 +69,14 @@ export default class RobloxUtils {
         });
 
         const json = await res.json();
+        const fieldData = json?.failureDetails?.[0]?.fieldData;
 
-        return json['failureDetails'][0]['fieldData'];
+        if (fieldData == null) {
+            console.log('[❌] Failed to get field data!')
+            return ''
+        }
+
+        return fieldData;
     }
 
     static async createAccount(captchaToken, captchaId) {
@@ -109,7 +115,13 @@ export default class RobloxUtils {
         const regex = /.ROBLOSECURITY=(_\|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.\|_[A-Za-z0-9]+)/g
         const cookies = res.headers.get('set-cookie');
 
-        const cookie = regex.exec(cookies)[1];
+        const cookie = regex.exec(cookies)?.[1];
+
+        if (cookie == null) {
+            console.log('[❌] Failed to find a cookie in the response!')
+            return null;
+        }
+
 
         const account = new RobloxAccount(username, json.userId, password, cookie);
 
