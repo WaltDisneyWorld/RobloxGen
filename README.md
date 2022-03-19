@@ -17,7 +17,7 @@ Run the project:
 ``` npm start ```
 
 ## Usage
-### ⚠ Don't expose this program to the internet if you don't want to get ratelimited by ROBLOX!
+### ⚠ Don't expose this program to the internet if you don't want to get ratelimited by ROBLOX! ⚠
 The project runs on port 80 by default. Visit http://localhost:80/
 
 You can get a random cookie from the database at http://localhost:80/gen
