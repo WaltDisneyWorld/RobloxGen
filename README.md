@@ -1,9 +1,9 @@
 # RobloxGen
 ## What is this?
-This project allows you to create ROBLOX accounts really fast, all you have to do is solve a captcha and the backend does the rest!
+This project allows you to create ROBLOX accounts really fast, all you have to do is solve a captcha and the backend creates and saves a new account!
 
 ## Requirements
-Node.JS/NPM
+Node.JS and npm
 
 MySQL
 
@@ -14,9 +14,18 @@ Install NPM dependencies:
 
 Run the project:
 
-``` node . ```
+``` npm start ```
 
 ## Usage
-The project runs on port 28493 by default. Visit http://localhost:28493/
+### ⚠ Don't expose this program to the internet if you don't want to get ratelimited by ROBLOX!
+The project runs on port 80 by default. Visit http://localhost:80/
 
-You can get a random cookie from the database at http://localhost:28493/gen
+You can get a random cookie from the database at http://localhost:80/gen
+
+## Contributing
+You can contribute to this project by opening issues and making pull requests. I'll try to fix anything ASAP.
+
+## Credits
+This program was completely developed by me.
+
+Special thanks to [WaltDisneyWorld](https://github.com/WaltDisneyWorld) for reminding me to ressurect this project from the dead.
