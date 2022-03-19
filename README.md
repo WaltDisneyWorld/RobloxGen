@@ -13,7 +13,7 @@ MySQL
 ## Setup
 Install NPM dependencies:
 
-```npm init```
+```npm install```
 
 Run the project:
 
