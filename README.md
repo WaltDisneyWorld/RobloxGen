@@ -2,6 +2,9 @@
 ## What is this?
 This project allows you to create ROBLOX accounts really fast, all you have to do is solve a captcha and the backend creates and saves a new account!
 
+## What is this for?
+You can use these accounts for exploiting or botting.
+
 ## Requirements
 Node.JS and npm
 
