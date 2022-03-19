@@ -20,6 +20,7 @@ app.get('/create', async (req, res) => {
     if (account != null) {
         await DBUtil.addAccount(account.userId, account.username, account.password, account.cookie);
         res.send('UserId: ' + account.userId);
+        return;
     }
 
     res.send('UserId: failed');
