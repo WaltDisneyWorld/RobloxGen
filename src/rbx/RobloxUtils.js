@@ -118,7 +118,7 @@ export default class RobloxUtils {
         const cookie = regex.exec(cookies)?.[1];
 
         if (cookie == null) {
-            console.log('[❌] Failed to find a cookie in the response!')
+            console.log('[❌] Failed to find a cookie in the response!');
             return null;
         }
 
