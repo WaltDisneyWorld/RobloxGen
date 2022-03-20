@@ -31,4 +31,6 @@ You can contribute to this project by opening issues and making pull requests. I
 ## Credits
 This program was completely developed by me.
 
-Special thanks to [WaltDisneyWorld](https://github.com/WaltDisneyWorld) for reminding me to resurrect this project from the dead.
+[WaltDisneyWorld](https://github.com/WaltDisneyWorld) - reminding me to resurrect this project from the dead.
+
+[Arcxdd](https://github.com/Arcxdd) - fixing issues and reminding me that I'm a goof
