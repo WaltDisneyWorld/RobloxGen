@@ -15,6 +15,10 @@ Install NPM dependencies:
 
 ```npm install```
 
+Setup the configuration:
+1. Rename .env.sample to .env
+2. Fill in the fields
+
 Run the project:
 
 ``` npm start ```
