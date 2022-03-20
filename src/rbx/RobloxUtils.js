@@ -4,6 +4,10 @@ import RobloxAccount from './RobloxAccount.js'
 
 export default class RobloxUtils {
 
+    /**
+     * Generates a valid ROBLOX CSRF token
+     * @returns {string} - The generated CSRF token
+     */
     static async genRegisterCSRF() {
         const res = await fetch('https://roblox.com/');
         const txt = await res.text();
@@ -32,6 +36,10 @@ export default class RobloxUtils {
         return json.code == 0;
     }
 
+    /**
+     * Generates a valid ROBLOX username
+     * @returns {string} - The generated username
+     */
     static async genUsername() {
         const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
         const length = 20;
