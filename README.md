@@ -43,8 +43,8 @@ You can contribute to this project by opening issues and making pull requests. I
 
 ## Credits
 
-This program was completely developed by me.
+[jluims](https://github.com/jluims/) - Made the initial version of this project and reverse-engineered the ROBLOX signup api
 
 [WaltDisneyWorld](https://github.com/WaltDisneyWorld) - reminding me to resurrect this project from the dead.
 
-[Arcxdd](https://github.com/Arcxdd) - fixing issues and reminding me that I'm a goof
+[Arcxdd](https://github.com/Arcxdd) - fixed issues and rewrote the api as a REST api
