@@ -153,3 +153,5 @@ dist
 
 roblox-gen.service
 database.json
+
+docker-compose.yml

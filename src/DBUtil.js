@@ -1,40 +1,44 @@
-import mysql from 'mysql2/promise';
-import RobloxAccount from './rbx/RobloxAccount.js';
+import mysql from "mysql2/promise";
+import RobloxAccount from "./rbx/RobloxAccount.js";
 
 class DBUtil {
+  host;
+  user;
+  pass;
+  database;
 
-    host
-    user
-    pass
-    database
+  /**
+   * @type {mysql.Connection}
+   */
+  connection;
 
-    /**
-     * @type {mysql.Connection}
-     */
-    connection
+  constructor() {}
 
-    constructor() {
+  async connect() {
+    try {
+      this.connection = await mysql.createConnection({
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: process.env.DB_DB,
+      });
+
+      console.log("[✅] Connected to the database");
+
+      return true;
+    } catch (ex) {
+      console.log(`[❌] Failed to connect to the database (${ex})`);
+
+      return false;
     }
+  }
 
-    async connect() {
-        try {
-            this.connection = await mysql.createConnection({
-                host: process.env.DB_HOST,
-                user: process.env.DB_USER,
-                password: process.env.DB_PASS,
-                database: process.env.DB_DB
-            });
-            console.log('[✅] Connected to the database')
-            return true;
-        } catch (ex) {
-            console.log(`[❌] Failed to connect to the database (${ex})`);
-            return false;
-        }
-    }
-
-    async setupDB() {
-        try {
-            await this.connection.execute(`
+  /**
+   * Setups the MySQL database
+   */
+  async setupDB() {
+    try {
+      await this.connection.execute(`
             CREATE TABLE \`accounts\` (
                 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                 user_id BIGINT NOT NULL,
@@ -42,30 +46,48 @@ class DBUtil {
                 password VARCHAR(30) NOT NULL,
                 cookie VARCHAR(900) NOT NULL
             );`);
-            console.log('[✅] Created accounts table');
-        } catch (ex) {}
+      console.log("[✅] Created accounts table");
+    } catch (ex) {}
+  }
+
+  /**
+   * Adds an account into the database
+   * @param  {number} userId
+   * @param  {string} username
+   * @param  {string} password
+   * @param  {string} cookie
+   */
+  async addAccount(userId, username, password, cookie) {
+    try {
+      await this.connection.execute(
+        "INSERT INTO `accounts` (user_id, username, password, cookie) VALUES (?, ?, ?, ?)",
+        [userId, username, password, cookie]
+      );
+      console.log(`[✅] Account ${username} inserted into the database!`);
+    } catch (err) {
+      console.log("[❌] Error inserting account: " + err);
     }
+  }
 
-    async addAccount(userId, username, password, cookie) {
-        try {
-            await this.connection.execute('INSERT INTO `accounts` (user_id, username, password, cookie) VALUES (?, ?, ?, ?)', [userId, username, password, cookie]);
-            console.log(`[✅] Account ${username} inserted into the database`);
-        } catch (err) {
-            console.log('[❌] Error inserting account: ' + err);
-        }
-    }
+  /**
+   * @returns {RobloxAccount}
+   */
+  async getRandomAccount() {
+    const results = await this.connection.execute(
+      "SELECT * FROM accounts ORDER BY rand() LIMIT 1"
+    );
 
-    /**
-     * @returns {RobloxAccount}
-     */
-    async getRandomAccount() {
-        const results = await this.connection.execute('SELECT * FROM accounts ORDER BY rand() LIMIT 1');
-        const row = results[0][0];
-        const account = new RobloxAccount(row.username, row.user_id, row.password, row.cookie);
+    const row = results[0][0];
 
-        return account;
-    }
+    const account = new RobloxAccount(
+      row.username,
+      row.user_id,
+      row.password,
+      row.cookie
+    );
 
+    return account;
+  }
 }
 
 export default new DBUtil();
