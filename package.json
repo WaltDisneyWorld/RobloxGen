@@ -17,5 +17,10 @@
     "node-fetch": "^2.6.7",
     "node-html-parser": "^5.1.0"
   },
-  "type": "module"
+  "type": "module",
+  "prettier": {
+    "trailingComma": "none",
+    "semi": true,
+    "singleQuote": true
+  }
 }
