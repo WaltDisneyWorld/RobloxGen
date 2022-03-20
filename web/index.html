@@ -5,25 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
     <title>Roblox Gen</title>
 </head>
 
 <body>
-    <p id="accountstxt">Accounts: 0</p>
-    <iframe id="captcha-frame" src="captcha_frame.html" scrolling="no" frameborder="0" style="overflow: hidden;"
-        height="300"></iframe>
+    <div id="loading">
+        <img src="img/spinner.svg" alt="" width="50">
+    </div>
+    <div id="content">
+        <iframe id="captcha-frame" src="captcha_frame.html" scrolling="no" frameborder="0" style="overflow: hidden;"
+            height="252" width="300"></iframe>
+        <p id="accountstxt">Accounts: 0</p>
+    </div>
 
-    <script>
-        let accounts = 0;
-
-        window.addEventListener('message', ({data}) => {
-            if (data != 'done') return;
-            document.getElementById('captcha-frame').contentWindow.location.reload();
-            document.getElementById('accountstxt').textContent =
-                'Accounts: ' + ++
-            accounts;
-        })
-    </script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>
