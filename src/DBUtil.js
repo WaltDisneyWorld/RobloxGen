@@ -59,7 +59,7 @@ class DBUtil {
      * @returns {RobloxAccount}
      */
     async getRandomAccount() {
-        const results = await this.connection.execute('SELECT * FROM Accounts ORDER BY rand() LIMIT 1');
+        const results = await this.connection.execute('SELECT * FROM accounts ORDER BY rand() LIMIT 1');
         const row = results[0][0];
         const account = new RobloxAccount(row.username, row.user_id, row.password, row.cookie);
 
