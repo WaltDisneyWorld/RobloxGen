@@ -527,6 +527,11 @@ unpipe@1.0.0, unpipe@~1.0.0:
   resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
   integrity sha1-sr9O6FFKrmFltIF4KdIbLvSZBOw=
 
+username-generator@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/username-generator/-/username-generator-1.1.0.tgz#3b79405a8167e77e64df67c7a6f36fedceb6b0fc"
+  integrity sha512-2hpbjhJ9/DJdrPajdeJ2nQ1v9sNLT3IaLGhejd9GbrVMCGZMc3h2Ug6qUlIKjDkRUT0HsozXYboaypxo94OYfw==
+
 utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"

@@ -5,7 +5,7 @@ async function loadChallenge() {
   const captcha = new FunCaptcha({
     public_key: 'A2A14B1D-1AF3-C791-9BBC-EE33CC7A0A6F',
     target_html: 'CAPTCHA',
-    callback: async (captchaToken) => {
+    callback: async captchaToken => {
       const res = await fetch(
         '/create?captcha=' +
           captchaToken +

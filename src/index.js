@@ -18,10 +18,7 @@ app.get('/create', async (req, res) => {
   const account = await RobloxUtil.createAccount(captcha, captchaId);
 
   if (account === null) {
-    return res.json({
-      success: false,
-      message: 'Failed to create account!'
-    });
+    return res.json({ success: false, userId: 'Failed to create account!' });
   }
 
   await DBUtil.addAccount(
@@ -31,7 +28,7 @@ app.get('/create', async (req, res) => {
     account.cookie
   );
 
-  res.send('UserId: ' + account.userId);
+  res.send({ success: true, userId: account.userId });
 });
 
 app.get('/gen', async (_, res) => {

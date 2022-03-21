@@ -13,7 +13,10 @@ class DBUtil {
   connection;
 
   constructor() {}
-
+  /**
+   * Connects to the MySQL database
+   * @returns {Promise<boolean>}
+   */
   async connect() {
     try {
       this.connection = await mysql.createConnection({
@@ -70,6 +73,7 @@ class DBUtil {
   }
 
   /**
+   * Gets a random ROBLOX account from the database
    * @returns {RobloxAccount}
    */
   async getRandomAccount() {
