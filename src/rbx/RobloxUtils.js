@@ -2,6 +2,9 @@ import htmlParser from 'node-html-parser';
 import fetch from 'node-fetch';
 import RobloxAccount from './RobloxAccount.js';
 import username from 'username-generator';
+import UserAgent from '../UserAgent.js';
+
+UserAgent();
 
 export default class RobloxUtils {
   /**
@@ -24,8 +27,7 @@ export default class RobloxUtils {
     const res = await fetch(url, {
       method: 'POST',
       headers: {
-        'User-Agent':
-          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36',
+        'User-Agent': UserAgent(),
         'x-csrf-token': await this.genRegisterCSRF(),
         'content-type': 'application/json'
       },
@@ -72,8 +74,7 @@ export default class RobloxUtils {
   static async getFieldData() {
     const res = await fetch('https://auth.roblox.com/v2/signup', {
       headers: {
-        'user-agent':
-          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36',
+        'user-agent': UserAgent(),
         'x-csrf-token': await this.genRegisterCSRF(),
         'content-type': 'application/json'
       },
@@ -124,8 +125,7 @@ export default class RobloxUtils {
     const res = await fetch(url, {
       method: 'POST',
       headers: {
-        'user-agent':
-          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36',
+        'user-agent': UserAgent(),
         'x-csrf-token': await this.genRegisterCSRF(),
         'content-type': 'application/json'
       },
