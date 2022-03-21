@@ -59,6 +59,7 @@ class DBUtil {
    * @param  {string} username
    * @param  {string} password
    * @param  {string} cookie
+   * @returns {Promise<void>}
    */
   async addAccount(userId, username, password, cookie) {
     try {
@@ -74,7 +75,7 @@ class DBUtil {
 
   /**
    * Gets a random ROBLOX account from the database
-   * @returns {RobloxAccount}
+   * @returns {Promise<RobloxAccount>}
    */
   async getRandomAccount() {
     const results = await this.connection.execute(
@@ -91,6 +92,15 @@ class DBUtil {
     );
 
     return account;
+  }
+
+  // Add a method to get all accounts from db
+  async getAllAccounts() {
+    const results = await this.connection.execute('SELECT * FROM accounts');
+
+    const row = results[0];
+
+    return row;
   }
 }
 
