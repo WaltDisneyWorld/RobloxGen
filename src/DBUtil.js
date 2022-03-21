@@ -1,5 +1,5 @@
-import mysql from "mysql2/promise";
-import RobloxAccount from "./rbx/RobloxAccount.js";
+import mysql from 'mysql2/promise';
+import RobloxAccount from './rbx/RobloxAccount.js';
 
 class DBUtil {
   host;
@@ -13,17 +13,20 @@ class DBUtil {
   connection;
 
   constructor() {}
-
+  /**
+   * Connects to the MySQL database
+   * @returns {Promise<boolean>}
+   */
   async connect() {
     try {
       this.connection = await mysql.createConnection({
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
         password: process.env.DB_PASS,
-        database: process.env.DB_DB,
+        database: process.env.DB_DB
       });
 
-      console.log("[✅] Connected to the database");
+      console.log('[✅] Connected to the database');
 
       return true;
     } catch (ex) {
@@ -46,7 +49,7 @@ class DBUtil {
                 password VARCHAR(30) NOT NULL,
                 cookie VARCHAR(900) NOT NULL
             );`);
-      console.log("[✅] Created accounts table");
+      console.log('[✅] Created accounts table');
     } catch (ex) {}
   }
 
@@ -60,21 +63,22 @@ class DBUtil {
   async addAccount(userId, username, password, cookie) {
     try {
       await this.connection.execute(
-        "INSERT INTO `accounts` (user_id, username, password, cookie) VALUES (?, ?, ?, ?)",
+        'INSERT INTO `accounts` (user_id, username, password, cookie) VALUES (?, ?, ?, ?)',
         [userId, username, password, cookie]
       );
       console.log(`[✅] Account ${username} inserted into the database!`);
     } catch (err) {
-      console.log("[❌] Error inserting account: " + err);
+      console.log('[❌] Error inserting account: ' + err);
     }
   }
 
   /**
+   * Gets a random ROBLOX account from the database
    * @returns {RobloxAccount}
    */
   async getRandomAccount() {
     const results = await this.connection.execute(
-      "SELECT * FROM accounts ORDER BY rand() LIMIT 1"
+      'SELECT * FROM accounts ORDER BY rand() LIMIT 1'
     );
 
     const row = results[0][0];

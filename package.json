@@ -15,7 +15,14 @@
     "express": "^4.17.1",
     "mysql2": "^2.3.3",
     "node-fetch": "^2.6.7",
-    "node-html-parser": "^5.1.0"
+    "node-html-parser": "^5.1.0",
+    "username-generator": "^1.1.0"
   },
-  "type": "module"
+  "type": "module",
+  "prettier": {
+    "trailingComma": "none",
+    "arrowParens": "avoid",
+    "singleQuote": true,
+    "semi": true
+  }
 }
