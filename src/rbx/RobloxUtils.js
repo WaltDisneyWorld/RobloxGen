@@ -82,7 +82,7 @@ export default class RobloxUtils {
     const json = await res.json();
     const fieldData = json?.failureDetails?.[0]?.fieldData;
 
-    if (fieldData === null) {
+    if (fieldData == null) {
       console.log("[❌] Failed to get field data!");
       return "";
     }
@@ -133,7 +133,7 @@ export default class RobloxUtils {
 
     const cookie = regex.exec(cookies)?.[1];
 
-    if (cookie === null) {
+    if (cookie == null) {
       console.log("[❌] Failed to find a cookie in the response!");
       return null;
     }
