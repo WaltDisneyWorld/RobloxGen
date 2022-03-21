@@ -16,10 +16,6 @@ MySQL
 
 ## Setup
 [Setup Guide here](https://github.com/jluims/RobloxGen/wiki)
-Install NPM dependencies:
-
-`npm install`
-
 ## Database Setup
 
 
