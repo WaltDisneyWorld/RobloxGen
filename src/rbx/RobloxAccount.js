@@ -4,6 +4,13 @@ export default class RobloxAccount {
   password;
   cookie;
 
+  /**
+   * @param  {string} username
+   * @param  {number} userId
+   * @param  {string} password
+   * @param  {string} cookie
+   */
+
   constructor(username, userId, password, cookie) {
     this.username = username;
     this.userId = userId;
