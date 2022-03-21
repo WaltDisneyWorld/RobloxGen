@@ -6,7 +6,7 @@ import username from 'username-generator';
 export default class RobloxUtils {
   /**
    * Generates a valid ROBLOX CSRF token
-   * @returns {string} - The generated CSRF token
+   * @returns {Promise<string>} - The generated CSRF token
    */
   static async genRegisterCSRF() {
     const res = await fetch('https://roblox.com/');
@@ -17,7 +17,7 @@ export default class RobloxUtils {
   /**
    * Checks if username it's available
    * @param  {string} username
-   * @returns {boolean}
+   * @returns {Promise<boolean>}
    */
   static async checkUsername(username) {
     const url = 'https://auth.roblox.com/v1/usernames/validate';
@@ -45,12 +45,11 @@ export default class RobloxUtils {
    * Generates a username
    * @returns {string} Username
    */
-  static async genUsername() {
+  static genUsername() {
     const usr = username.generateUsername();
 
     return usr;
   }
-
   /**
    * Generates a password
    * @returns {string} Password
@@ -68,7 +67,7 @@ export default class RobloxUtils {
   }
   /**
    * Gets the field data of ROBLOX
-   * @returns {string}
+   * @returns {Promise<string>}
    */
   static async getFieldData() {
     const res = await fetch('https://auth.roblox.com/v2/signup', {
@@ -85,7 +84,7 @@ export default class RobloxUtils {
     const json = await res.json();
     const fieldData = json?.failureDetails?.[0]?.fieldData;
 
-    if (fieldData == null) {
+    if (!fieldData) {
       console.log('[❌] Failed to get field data!');
       return '';
     }
@@ -96,7 +95,7 @@ export default class RobloxUtils {
    * Creates a ROBLOX account
    * @param  {string} captchaToken
    * @param  {string} captchaId
-   * @returns {RobloxAccount}
+   * @returns {Promise<RobloxAccount>}
    */
   static async createAccount(captchaToken, captchaId) {
     const username = await this.genUsername();
@@ -141,7 +140,7 @@ export default class RobloxUtils {
 
     const cookie = regex.exec(cookies)?.[1];
 
-    if (cookie == null) {
+    if (!cookie) {
       console.log('[❌] Failed to find a cookie in the response!');
       return null;
     }
