@@ -15,6 +15,12 @@ app.use(express.static('web/'));
 app.get('/create', async (req, res) => {
   const captcha = req.query.captcha;
   const captchaId = req.query.captchaId;
+
+  if (!captcha || !captchaId) {
+    res.json({ success: false, error: 'Missing captcha' });
+    return;
+  }
+
   const account = await RobloxUtil.createAccount(captcha, captchaId);
 
   if (!account) {
@@ -28,13 +34,19 @@ app.get('/create', async (req, res) => {
     account.cookie
   );
 
-  res.send({ success: true, userId: account.userId });
+  res.json({ success: true, userId: account.userId });
 });
 
 app.get('/gen', async (_, res) => {
   const account = await DBUtil.getRandomAccount();
 
   res.json({ success: true, account });
+});
+
+app.get('/accounts', async (_, res) => {
+  const accounts = await DBUtil.getAllAccounts();
+
+  res.json({ success: true, accounts });
 });
 
 app.get('/field_data', async (_, res) => {
@@ -47,7 +59,7 @@ app.get('/field_data', async (_, res) => {
 
   app.listen(process.env.WEB_PORT, () => {
     console.log(
-      '[✅] Listening on port http://localhost:' + process.env.WEB_PORT
+      '[✅] Web app started on http://localhost:' + process.env.WEB_PORT
     );
   });
 })();
