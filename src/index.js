@@ -17,7 +17,7 @@ app.get("/create", async (req, res) => {
   const captchaId = req.query.captchaId;
   const account = await RobloxUtil.createAccount(captcha, captchaId);
 
-  if (account === null) {
+  if (account == null) {
     return res.json({ success: false, message: "Failed to create account!" });
   }
 
